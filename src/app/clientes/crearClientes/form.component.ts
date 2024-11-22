@@ -24,12 +24,16 @@ export class FormComponent {
   public crearCliente(){
     console.log("Creando cliente");
     this.clienteService.create(this.cliente).subscribe(
-      response =>
       {
-        console.log("Cliente creado exitosamente");
-        console.log(this.cliente);
-        this.router.navigate(['/clientes/listarClientes']),
-        Swal.fire('Nuevo cliente', `Cliente ${response.nombre} creado con éxito`, 'success')
+        next: (response) => {
+          console.log("Cliente creado exitosamente");
+          console.log(this.cliente);
+          this.router.navigate(['/clientes/listarClientes']),
+          Swal.fire('Nuevo cliente', `Cliente ${response.nombre} creado con éxito`, 'success')
+        },
+        error: (err) => {
+          console.error('Error al clear cliente:', err.message);
+        }
       }
     )
   }

@@ -33,15 +33,15 @@ export class FormActualizarComponent {
   public actualizarCliente(): void{
     console.log("Actualizando cliente", this.cliente);
     this.clienteService.update(this.cliente).subscribe(
-      response => {
+      {next: (response) => {
         console.log("Cliente actualizado existosamente");
         this.router.navigate(['clientes/listarClientes']);
         Swal.fire('Cliente actualizado' , `Cliente ${response.nombre} actualizado con éxito!`, 'success');
       },
-      error => {
-        console.error('Error al actualizar el cliente: ', error);
-        Swal.fire('Error', 'No se pudo actualizar el cliente. Intente nuevamente', 'error');
-      }
+      error: (err) => {
+        console.error('Error al actualizar el cliente: ', err.message);
+
+      }}
     );
   }
 }
