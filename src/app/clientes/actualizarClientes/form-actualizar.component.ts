@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 export class FormActualizarComponent {
   public cliente: Cliente = new Cliente();
   public titulo: String = 'Actualizar cliente';
+  public listaErrores: any ={};
 
   constructor(private clienteService: ClienteService, private router: Router, private route: ActivatedRoute) { }
 
@@ -40,8 +41,8 @@ export class FormActualizarComponent {
         Swal.fire('Cliente actualizado' , `Cliente ${response.nombre} actualizado con éxito!`, 'success');
       },
       error: (err) => {
-        console.error('Error al actualizar el cliente: ', err.message);
-
+        console.log(err.error);
+        this.listaErrores = err.error;
       }}
     );
   }
