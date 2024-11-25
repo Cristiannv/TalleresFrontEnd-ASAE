@@ -7,17 +7,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClienteService } from '../servicios/cliente.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [FormsModule, SweetAlert2Module, HttpClientModule],
+  imports: [FormsModule, SweetAlert2Module, HttpClientModule, CommonModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
 export class FormComponent {
   public cliente: Cliente = new Cliente();
   public titulo: string = "Crear Cliente";
+  public listaErrores: any ={};
 
   constructor(private clienteService: ClienteService, private router: Router) {}
 
@@ -32,7 +34,8 @@ export class FormComponent {
           Swal.fire('Nuevo cliente', `Cliente ${response.nombre} creado con éxito`, 'success')
         },
         error: (err) => {
-          console.error('Error al clear cliente:', err.message);
+          console.log(err.error);
+          this.listaErrores = err.error;
         }
       }
     )

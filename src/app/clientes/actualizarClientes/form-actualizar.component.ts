@@ -6,11 +6,12 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ClienteService } from '../servicios/cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-form-actualizar',
   standalone: true,
-  imports: [FormsModule, SweetAlert2Module, HttpClientModule],
+  imports: [FormsModule, SweetAlert2Module, HttpClientModule, CommonModule],
   templateUrl: './form-actualizar.component.html',
   styleUrl: './form-actualizar.component.css'
 })

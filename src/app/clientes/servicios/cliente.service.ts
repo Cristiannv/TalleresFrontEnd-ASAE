@@ -12,7 +12,8 @@ export class ClienteService {
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   private urlEndPoint: string = 'http://localhost:5000/api/clientes';
   private handleError(error: HttpErrorResponse){
-    if(error.status === 400 || error.status === 404){
+    if(error.error?.mensaje){
+      console.log('El atributo mensaje existe', error.error.mensaje);
       const codigoError = error.error.codigoError;
       const mensajeError = error.error.mensaje;
       const codigoHttp = error.error.codigoHttp;
@@ -30,7 +31,7 @@ export class ClienteService {
 
       return throwError(() => new Error(mensajeError));
     } else {
-    return throwError(() => Error('Ocurrío un error inesperado.'));
+    return throwError(error);
     }
   }
 
